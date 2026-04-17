@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 
 public class Test {
-    static final String[] ALGORITHMS = {
+    private static final String[] ALGORITHMS = {
             Bubble.class.getSimpleName(),
             Selection.class.getSimpleName(),
             Insertion.class.getSimpleName(),
@@ -19,48 +22,68 @@ public class Test {
             Merge.class.getSimpleName(),
             "Arrays.sort()"
     };
-    static final int ITERATIONS = 5;
-    static final long SEED = 2026;
-    static final int[] SIZES = {25000, 50000, 100000};
+    private static final int[] ARRAY_SIZES = {25000, 50000, 100000};
+
+    private static final long SEED = 2026;
+    private static final byte ITERATIONS = 5;
+    private static final short PARTIAL_SWAP_PERCENTAGE = 10;
+    private static final int DUPLICATES_RANGE = 10;
 
     static void main(String[] args) {
-        System.out.print("zahřívání JVM... ");
-        Integer[] warmup = new Integer[10000];
+        System.out.print("Příprava... ");
+        Arrays.sort(ARRAY_SIZES);
+        int biggestSize = ARRAY_SIZES[ARRAY_SIZES.length - 1];
+        Integer[] warmup = new Integer[biggestSize];
         for (int i = 0; i < warmup.length; i++) {
-            warmup[i] = StdRandom.uniformInt(10000);
+            warmup[i] = StdRandom.uniformInt(biggestSize);
         }
-        Bubble.sort(warmup.clone());
-        Selection.sort(warmup.clone());
-        Insertion.sort(warmup.clone());
-        Quick.sort(warmup.clone());
-        Heap.sort(warmup.clone());
-        Merge.sort(warmup.clone());
-        Arrays.sort(warmup.clone());
+        int warmupIterations = 5;
+        while (warmupIterations-- > 0) {
+            Bubble.sort(warmup.clone());
+            Selection.sort(warmup.clone());
+            Insertion.sort(warmup.clone());
+            Quick.sort(warmup.clone());
+            Heap.sort(warmup.clone());
+            Merge.sort(warmup.clone());
+            Arrays.sort(warmup.clone());
+        }
+
+        System.gc();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ignored) {}
         System.out.println("hotovo.");
         
-        System.out.print("příprava hlavních polí a JSONu... ");
+        System.out.print("Příprava polí... ");
         StdRandom.setSeed(SEED);
-        Integer[] masterRandom = new Integer[100000];
-        Integer[] masterDuplicates = new Integer[100000];
-        for (int i = 0; i < 100000; i++) {
-            masterRandom[i] = StdRandom.uniformInt(100000);
-            masterDuplicates[i] = StdRandom.uniformInt(10);
+        Integer[] masterRandom = new Integer[biggestSize];
+        Integer[] masterDuplicates = new Integer[biggestSize];
+        for (int i = 0; i < biggestSize; i++) {
+            masterRandom[i] = StdRandom.uniformInt(biggestSize);
+            masterDuplicates[i] = StdRandom.uniformInt(DUPLICATES_RANGE);
         }
         
         StringBuilder json = new StringBuilder();
         json.append("{\n");
         json.append("  \"metadata\": {\n");
+        json.append("    \"array_sizes\": ").append(Arrays.toString(ARRAY_SIZES)).append(",\n");
         json.append("    \"seed\": ").append(SEED).append(",\n");
-        json.append("    \"iterations\": ").append(ITERATIONS).append("\n");
+        json.append("    \"iterations\": ").append(ITERATIONS).append(",\n");
+        json.append("    \"duplicates_range\": ").append(DUPLICATES_RANGE).append(",\n");
+        json.append("    \"partial_swap_percentage\": ").append(PARTIAL_SWAP_PERCENTAGE).append("\n");
         json.append("  },\n");
         json.append("  \"results\": {\n");
         System.out.println("hotovo.");
 
-        for (int i = 0; i < SIZES.length; i++) {
-            int n = SIZES[i];
-            System.out.println("\n### měření pro " + n + " ###");
+        for (int i = 0; i < ARRAY_SIZES.length; i++) {
+            int n = ARRAY_SIZES[i];
+            System.gc();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {}
 
-            System.out.print("příprava... ");
+            System.out.println("\n### Měření na n=(" + n + ") ###");
+            System.out.print("Příprava... ");
             Integer[] random = new Integer[n];
             System.arraycopy(masterRandom, 0, random, 0, n);
 
@@ -71,11 +94,9 @@ public class Test {
             Collections.reverse(Arrays.asList(reversed));
 
             Integer[] partial = sorted.clone();
-            int swaps = n / 10;
+            int swaps = (n * PARTIAL_SWAP_PERCENTAGE) / 100;
             while (swaps-- > 0) {
-                int i1 = StdRandom.uniformInt(n);
-                int i2 = StdRandom.uniformInt(n);
-                exch(partial, i1, i2);
+                exch(partial, StdRandom.uniformInt(n), StdRandom.uniformInt(n));
             }
 
             Integer[] duplicates = new Integer[n];
@@ -88,33 +109,33 @@ public class Test {
                 String algorithm = ALGORITHMS[j];
                 System.out.print(algorithm + "... ");
 
-                double[] timesRandom = new double[ITERATIONS];
-                double[] timesSorted = new double[ITERATIONS];
-                double[] timesReversed = new double[ITERATIONS];
-                double[] timesPartial = new double[ITERATIONS];
-                double[] timesDuplicates = new double[ITERATIONS];
+                double[] timeRandom = new double[ITERATIONS];
+                double[] timePartial = new double[ITERATIONS];
+                double[] timeDuplicates = new double[ITERATIONS];
+                double[] timeSorted = new double[ITERATIONS];
+                double[] timeReversed = new double[ITERATIONS];
 
                 for (int k = 0; k < ITERATIONS; k++) {
                     System.out.print((k+1) + ". měření... ");
-                    timesRandom[k] = measureTime(algorithm, random.clone());
-                    timesSorted[k] = measureTime(algorithm, sorted.clone());
-                    timesReversed[k] = measureTime(algorithm, reversed.clone());
-                    timesPartial[k] = measureTime(algorithm, partial.clone());
-                    timesDuplicates[k] = measureTime(algorithm, duplicates.clone());
+                    timeRandom[k] = measureTime(algorithm, random.clone());
+                    timePartial[k] = measureTime(algorithm, partial.clone());
+                    timeDuplicates[k] = measureTime(algorithm, duplicates.clone());
+                    timeSorted[k] = measureTime(algorithm, sorted.clone());
+                    timeReversed[k] = measureTime(algorithm, reversed.clone());
                 }
 
-                addAlgorithmToJSON(json, algorithm, timesRandom, timesSorted, timesReversed, timesPartial, timesDuplicates, j == ALGORITHMS.length - 1);
+                addAlgorithmToJSON(json, algorithm, timeRandom, timePartial, timeDuplicates, timeSorted, timeReversed, j == ALGORITHMS.length - 1);
                 System.out.println("hotovo.");
             }
 
             json.append("    }");
-            if (i < SIZES.length - 1) {
+            if (i < ARRAY_SIZES.length - 1) {
                 json.append(",");
             }
             json.append("\n");
         }
 
-        json.append("  }\n}\n");
+        json.append("  }\n}");
         saveToFile(json.toString());
     }
 
@@ -159,49 +180,67 @@ public class Test {
                 Arrays.sort(data);
                 break;
             default:
-                throw new IllegalArgumentException("neznámý algoritmus " + algorithm);
+                throw new IllegalArgumentException("Neznámý algoritmus " + algorithm);
         }
 
         double time = timer.elapsedTime();
         if (!isSorted(data)) {
-            throw new RuntimeException("chybné řazení u algoritmu " + algorithm);
+            throw new RuntimeException("Chybné řazení u algoritmu " + algorithm);
         }
         return time;
     }
 
-    private static void addAlgorithmToJSON(StringBuilder sb, String algorithm, double[] random, double[] sorted, double[] reversed, double[] partial, double[] duplicates, boolean isLast) {
-        sb.append("      \"").append(algorithm).append("\": {\n");
-        sb.append("        \"random\": ").append(Arrays.toString(random)).append(",\n");
-        sb.append("        \"sorted\": ").append(Arrays.toString(sorted)).append(",\n");
-        sb.append("        \"reversed\": ").append(Arrays.toString(reversed)).append(",\n");
-        sb.append("        \"partial\": ").append(Arrays.toString(partial)).append(",\n");
-        sb.append("        \"duplicates\": ").append(Arrays.toString(duplicates)).append("\n");
-        sb.append("      }");
+    private static void addAlgorithmToJSON(StringBuilder json, String algorithm, double[] random, double[] partial, double[] duplicates, double[] sorted, double[] reversed, boolean isLast) {
+        json.append("      \"").append(algorithm).append("\": {\n");
+        appendScenario(json, "random", random, false);
+        appendScenario(json, "partial", partial, false);
+        appendScenario(json, "duplicates", duplicates, false);
+        appendScenario(json, "sorted", sorted, false);
+        appendScenario(json, "reversed", reversed, true);
+        json.append("      }");
         if (!isLast) {
-            sb.append(",");
+            json.append(",");
         }
-        sb.append("\n");
+        json.append("\n");
+    }
+
+    private static void appendScenario(StringBuilder json, String scenario, double[] iterations, boolean isLast) {
+        double sum = 0;
+        for (double t : iterations) {
+            sum += t;
+        }
+        double average = sum / iterations.length;
+        DecimalFormat df = new DecimalFormat("0.0##", new DecimalFormatSymbols(Locale.US));
+
+        json.append("        \"").append(scenario).append("\": {\n");
+        json.append("          \"average\": ").append(df.format(average)).append(",\n");
+        json.append("          \"iterations\": ").append(Arrays.toString(iterations)).append("\n");
+        json.append("        }");
+        if (!isLast) {
+            json.append(",");
+        }
+        json.append("\n");
     }
 
     private static void saveToFile(String contents) {
         try {
-            Path folder = Paths.get("reports");
+            Path folder = Paths.get("vysledky");
             if (!Files.exists(folder)) {
                 Files.createDirectories(folder);
             }
 
-            Path file = folder.resolve("results.json");
+            Path file = folder.resolve("vysledky.json");
 
             int counter = 1;
             while (Files.exists(file)) {
-                file = folder.resolve("results" + counter + ".json");
+                file = folder.resolve("vysledky" + counter + ".json");
                 counter++;
             }
 
             Files.writeString(file, contents);
-            System.out.println("\nvýsledky byly bezpečně uloženy do: " + file.toAbsolutePath());
+            System.out.println("\nVýsledky byly uloženy do: " + file.toAbsolutePath());
         } catch (IOException e) {
-            System.err.println("chyba při zápisu do souboru: " + e.getMessage());
+            System.err.println("Chyba při zápisu do souboru: " + e.getMessage());
         }
     }
 }
