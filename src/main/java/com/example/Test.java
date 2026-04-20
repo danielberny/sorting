@@ -36,7 +36,7 @@ public class Test {
         Integer[] warmup = new Integer[biggestSize];
         int warmupIterations = WARMPUP_ITERATIONS;
 
-        System.out.print("Řazení na zahřívacích polích... ");
+        System.out.print("Aplikování algoritmů na zahřívacích polích... ");
 
         while (warmupIterations-- > 0) {
             for (int i = 0; i < warmup.length; i++) {
@@ -86,7 +86,8 @@ public class Test {
                 Thread.sleep(100);
             } catch (InterruptedException ignored) {}
 
-            System.out.println("\nMěření na polích n=(" + n + ")");
+            String fn = String.format(new Locale("cs", "CZ"), "%,d", n);
+            System.out.println("\nMěření na polích n=(" + fn + ")");
             System.out.print("Příprava... ");
             Integer[] random = new Integer[n];
             System.arraycopy(masterRandom, 0, random, 0, n);

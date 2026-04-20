@@ -12,10 +12,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
@@ -58,34 +58,34 @@ public class Window {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        String title = "<html><body style=\"width: 700px;\">"
+        String title = "<html><body style=\"width: 750px;\">"
                 + "<h2 style=\"margin-top: 0px; margin-bottom: 2px;\">Analýza řadicích algoritmů</h2>"
                 + "<p>Tento program provádí měření časové složitosti algoritmů v reálném běhovém "
                 + "prostředí JVM s využitím programovacího jazyka Java. "
                 + "Pro maximální eliminaci zkreslení dat je nejprve prováděno testování "
                 + "v rámci zahřívací fáze (tzv. warm-up).</p>"
 
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
-                + "Testování</h3>"
+                + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
+                + "Testování</u></h3>"
                 + "<p style=\"margin-bottom: 4px;\">Způsob testování jednotlivých algoritmů "
-                + "vychází z dostupných nástrojů z veřejného repozitáře "
-                + "<a href=\"https://github.com/kevin-wayne/algs4\">kevin-wayne/algs4</a> přidruženého "
-                + "ke knize \"<a href=\"https://algs4.cs.princeton.edu\">Algorithms, 4th Edition</a>\" "
-                + "od autorů R. Sedgewick a K. Wayne (ISBN-13: 978-0-321-57351-3).</p>"
+                + "vychází z dostupných nástrojů z implementované závislosti na veřejném repozitáři "
+                + "<u>https://github.com/kevin-wayne/algs4</u> přidruženého "
+                + "ke knize <i>Algorithms, 4th Edition</i> (https://algs4.cs.princeton.edu) "
+                + "od autorů R. Sedgewick a K. Wayne (ISBN-10: 0-321-57351-X, ISBN-13: 978-0-321-57351-3).</p>"
                 + "<p>Program měří čas ve vteřinách napříč třemi fixními velikostmi standardních "
-                + "polí (25.000, 50.000, 100.000) a pěti separátními datovými scénáři. "
+                + "polí (25 000, 50 000, 100 000) a pěti separátními datovými scénáři. "
                 + "Všechny algoritmy operují nad objekty třídy Integer (využívající rozhraní "
                 + "Comparable) ve snaze simulovat režii moderních objektových architektur.</p>"
                 + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
-                + "  <li>\"random\": Náhodně generované pole s daty v rozsahu 0-100.000.</li>"
+                + "  <li>\"random\": Náhodně generované pole s daty v rozsahu 0–100 000.</li>"
                 + "  <li>\"partial\": Seřazené \"random\" pole s procentuálním šumem.</li>"
                 + "  <li>\"duplicates\": Náhodně generované pole s daty v omezeném rozsahu.</li>"
                 + "  <li>\"sorted\": Seřazené pole \"random\".</li>"
                 + "  <li>\"reversed\": Pozpátku seřazené pole \"random\".</li>"
                 + "</ul>"
 
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
-                + "Testované algoritmy</h3>"
+                + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
+                + "Testované algoritmy</u></h3>"
                 + "<p>Většina implementací pochází ze zmíněného repozitáře. "
                 + "Vlastní implementací byl pro kompletnost doplněn algoritmus Bubble sort, "
                 + "přičemž předmětem testování jsou následující algoritmy.</p>"
@@ -96,26 +96,26 @@ public class Window {
                 + "(algoritmus TimSort).</li>"
                 + "</ul>"
 
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
-                + "Vstupní parametry</h3>"
+                + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
+                + "Vstupní parametry</u></h3>"
                 + "<p>Veškeré vstupní parametry využívají pouze kladná celá čísla a ve většině případů "
                 + "jsou navíc uměle omezeny (omezení jsou uvedena u každého parametru v závorkách).</p>"
                 + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
                 + "  <li>Seed: Zaručuje reprodukovatelnost testovacích dat (veškerá kladná čísla "
                 + "datového typu long větší než nula).</li>"
                 + "  <li>Počet opakování: Počet iterací jednotlivých měření (pro garanci "
-                + "realizovatelnosti v rozumném čase v rozsahu 1-10).</li>"
+                + "realizovatelnosti v rozumném čase v rozsahu 1–10).</li>"
                 + "  <li>Procento promíchání: Generuje náhodný šum (v podobě záměny prvků na "
                 + "náhodně generovaných indexech rovněž vycházejících z hodnoty seed) pro simulaci "
                 + "reálných dat (vstupem je počet těchto záměn v podobě procent z velikosti "
-                + "testovaného pole omezený na 1-200; při vyšších procentech ekvivalentem náhodných dat).</li>"
+                + "testovaného pole omezený na 1–200; při vyšších procentech ekvivalentem náhodných dat).</li>"
                 + "  <li>Množství duplicitních hodnot: Omezuje rozsah unikátních hodnot v poli "
-                + "v podobě 0-[hodnota-1] (2-100.000; při maximální hodnotě rovněž ekvivalentem "
+                + "v podobě 0-[hodnota-1] (2–100 000; při maximální hodnotě rovněž ekvivalentem "
                 + "náhodných dat).</li>"
                 + "</ul>"
 
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
-                + "Výstup programu</h3>"
+                + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
+                + "Výstup programu</u></h3>"
                 + "<p>U všech výsledků je prováděna validace správnosti řazení a jednotlivé naměřené "
                 + "vzorky společně s průměrem konkrétního měření se ukládají do zvoleného adresáře. "
                 + "Ukládány jsou přehledně ve strukturované podobě formátu JSON do souboru "
@@ -332,7 +332,7 @@ public class Window {
         Integer[] warmup = new Integer[biggestSize];
         int warmupIterations = WARMUP_ITERATIONS;
 
-        updateUI(statusLabel, progressBar, "Řazení na zahřívacích polích...", 0);
+        updateUI(statusLabel, progressBar, "Aplikování algoritmů na zahřívacích polích...", 0);
 
         while (warmupIterations-- > 0) {
             if (isCancelled) {
@@ -416,7 +416,8 @@ public class Window {
                 String algorithm = ALGORITHMS[j];
 
                 int percent = 5 + (int) (((double) currentStep / totalSteps) * 90);
-                updateUI(statusLabel, progressBar, "Měření algoritmu " + algorithm + " na polích (n=" + n + ")", percent);
+                String fn = String.format(new Locale("cs", "CZ"), "%,d", n);
+                updateUI(statusLabel, progressBar, "Měření algoritmu " + algorithm + " na polích o velikosti (n=" + fn + ")", percent);
 
                 double[] timeRandom = new double[iterations];
                 double[] timePartial = new double[iterations];
@@ -521,10 +522,9 @@ public class Window {
             sum += t;
         }
         double average = sum / iterations.length;
-        DecimalFormat df = new DecimalFormat("0.0##", new DecimalFormatSymbols(Locale.US));
 
         json.append("        \"").append(scenario).append("\": {\n");
-        json.append("          \"average\": ").append(df.format(average)).append(",\n");
+        json.append("          \"average\": ").append(BigDecimal.valueOf(average).setScale(3, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString()).append(",\n");
         json.append("          \"iterations\": ").append(Arrays.toString(iterations)).append("\n");
         json.append("        }");
         if (!isLast) {
