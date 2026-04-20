@@ -31,6 +31,7 @@ public class Window {
             "Arrays.sort()"
     };
     private static final int[] ARRAY_SIZES = {25000, 50000, 100000};
+    private static final byte WARMUP_ITERATIONS = 5;
 
     private static long seed;
     private static byte iterations;
@@ -57,49 +58,72 @@ public class Window {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        String title = "<html><body style=\"width: 500px;\">"
+        String title = "<html><body style=\"width: 700px;\">"
                 + "<h2 style=\"margin-top: 0px; margin-bottom: 2px;\">Analýza řadicích algoritmů</h2>"
-                + "<p>Tato testovací sada provádí měření časové složitosti algoritmů v reálném běhovém "
-                + "prostředí JVM. Program aktivně eliminuje zkreslení způsobené např. odloženou JIT kompilací "
-                + "i řízeným dotazováním o uvolnění paměti (Garbage Collector).</p>"
+                + "<p>Tento program provádí měření časové složitosti algoritmů v reálném běhovém "
+                + "prostředí JVM s využitím programovacího jazyka Java. "
+                + "Pro maximální eliminaci zkreslení dat je nejprve prováděno testování "
+                + "v rámci zahřívací fáze (tzv. warm-up).</p>"
 
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">Testování</h3>"
-                + "<p>Program měří výkon napříč třemi fixními velikostmi polí (25 000, 50 000, 100 000)"
-                + "a pěti datovými scénáři.</p>"
-
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">Testované algoritmy</h3>"
-                + "<p>Většina implementací pochází ze standardizované akademické knihovny algs4 (K. Wayne). "
-                + "Vlastní implementací byl pro kompletnost doplněn algoritmus Bubble sort. "
-                + "Všechny algoritmy operují nad objekty (využívají rozhraní Comparable), čímž věrně "
-                + "simulují výkonnostní režii v moderních objektově orientovaných architekturách.</p>"
+                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
+                + "Testování</h3>"
+                + "<p style=\"margin-bottom: 4px;\">Způsob testování jednotlivých algoritmů "
+                + "vychází z dostupných nástrojů z veřejného repozitáře "
+                + "<a href=\"https://github.com/kevin-wayne/algs4\">kevin-wayne/algs4</a> přidruženého "
+                + "ke knize \"<a href=\"https://algs4.cs.princeton.edu\">Algorithms, 4th Edition</a>\" "
+                + "od autorů R. Sedgewick a K. Wayne (ISBN-13: 978-0-321-57351-3).</p>"
+                + "<p>Program měří čas ve vteřinách napříč třemi fixními velikostmi standardních "
+                + "polí (25.000, 50.000, 100.000) a pěti separátními datovými scénáři. "
+                + "Všechny algoritmy operují nad objekty třídy Integer (využívající rozhraní "
+                + "Comparable) ve snaze simulovat režii moderních objektových architektur.</p>"
                 + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
-                + "  <li>Elementární: Bubble Sort, Selection Sort, Insertion Sort</li>"
-                + "  <li>Pokročilé: Quick Sort, Heap Sort, Merge Sort</li>"
-                + "  <li>Pro kompletnost probíhá testování i na nativní metodě Arrays.sort() (TimSort)</li>"
+                + "  <li>\"random\": Náhodně generované pole s daty v rozsahu 0-100.000.</li>"
+                + "  <li>\"partial\": Seřazené \"random\" pole s procentuálním šumem.</li>"
+                + "  <li>\"duplicates\": Náhodně generované pole s daty v omezeném rozsahu.</li>"
+                + "  <li>\"sorted\": Seřazené pole \"random\".</li>"
+                + "  <li>\"reversed\": Pozpátku seřazené pole \"random\".</li>"
                 + "</ul>"
 
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">Výstup programu</h3>"
-                + "<p>U všech výsledků je prováděna validace správnosti řazení a společně s průměrem "
-                + "konkrétního měření se ukládají do zvoleného adresáře. Ukládány jsou ve strukturované "
-                + "podobě formátu JSON do souboru se stejnojmennou příponou a jsou tak připraveny "
-                + "pro případnou vizualizaci (např. v jazyce R).</p>"
+                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
+                + "Testované algoritmy</h3>"
+                + "<p>Většina implementací pochází ze zmíněného repozitáře. "
+                + "Vlastní implementací byl pro kompletnost doplněn algoritmus Bubble sort, "
+                + "přičemž předmětem testování jsou následující algoritmy.</p>"
+                + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
+                + "  <li>Elementární: Bubble sort, Selection sort, Insertion sort.</li>"
+                + "  <li>Pokročilé: Quicksort, Heapsort, Mergesort.</li>"
+                + "  <li>Pro kompletnost probíhá testování i na nativní metodě Arrays.sort() "
+                + "(algoritmus TimSort).</li>"
+                + "</ul>"
 
-                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">Vstupní parametry</h3>"
+                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
+                + "Vstupní parametry</h3>"
                 + "<p>Veškeré vstupní parametry využívají pouze kladná celá čísla a ve většině případů "
-                + "jsou navíc uměle omezeny (omezení jsou uvedena u každého vstupu v závorkách "
-                + "společně s případným odůvodněním).</p>"
+                + "jsou navíc uměle omezeny (omezení jsou uvedena u každého parametru v závorkách).</p>"
                 + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
-                + "  <li>Seed: Zaručuje reprodukovatelnost testovacích dat (1 - maximální hodnota "
-                + "datového typu long).</li>"
-                + "  <li>Počet opakování: Počet iterací jednotlivých měření (pro realizovatelnost 1-10).</li>"
-                + "  <li>Procento promíchání: Vnáší do polí náhodný šum (v podobě inverzí náhodně "
-                + "generovaných indexů rovněž vycházejících z hodnoty seed) pro simulaci reálných "
-                + "dat (procento z testované velikosti vstupu 1-200, při vyšších hodnotách ekvivalent "
-                + "náhodného pole).</li>"
-                + "  <li>Množství duplikátů: Omezuje rozsah unikátních hodnot (stres-test dělení pole).</li>"
+                + "  <li>Seed: Zaručuje reprodukovatelnost testovacích dat (veškerá kladná čísla "
+                + "datového typu long větší než nula).</li>"
+                + "  <li>Počet opakování: Počet iterací jednotlivých měření (pro garanci "
+                + "realizovatelnosti v rozumném čase v rozsahu 1-10).</li>"
+                + "  <li>Procento promíchání: Generuje náhodný šum (v podobě záměny prvků na "
+                + "náhodně generovaných indexech rovněž vycházejících z hodnoty seed) pro simulaci "
+                + "reálných dat (vstupem je počet těchto záměn v podobě procent z velikosti "
+                + "testovaného pole omezený na 1-200; při vyšších procentech ekvivalentem náhodných dat).</li>"
+                + "  <li>Množství duplicitních hodnot: Omezuje rozsah unikátních hodnot v poli "
+                + "v podobě 0-[hodnota-1] (2-100.000; při maximální hodnotě rovněž ekvivalentem "
+                + "náhodných dat).</li>"
                 + "</ul>"
 
-                + "<p style=\"margin-top: 6px;\">Nástroj pro generování dat byl zhotoven v rámci bakalářské práce<br>"
+                + "<h3 style=\"text-decoration: underline; margin-top: 6px; margin-bottom: 2px;\">"
+                + "Výstup programu</h3>"
+                + "<p>U všech výsledků je prováděna validace správnosti řazení a jednotlivé naměřené "
+                + "vzorky společně s průměrem konkrétního měření se ukládají do zvoleného adresáře. "
+                + "Ukládány jsou přehledně ve strukturované podobě formátu JSON do souboru "
+                + "se stejnojmennou příponou a jsou tak připraveny pro další zpracování "
+                + "(např. pro vizualizaci v jazyce R).</p>"
+
+                + "<p style=\"margin-top: 6px;\">Nástroj pro generování dat byl zhotoven "
+                + "v rámci bakalářské práce<br>"
                 + "Daniel Berný, 2026</p>"
                 + "</body></html>";
         JLabel titleLabel = new JLabel(title);
@@ -178,11 +202,11 @@ public class Window {
         });
 
         mainPanel.add(titleLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(inputPanel1);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(inputPanel2);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(btnApprove);
 
         mainDialog.add(mainPanel);
@@ -219,12 +243,12 @@ public class Window {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        JLabel statusLabel = new JLabel(" ");
+        JLabel statusLabel = new JLabel("Příprava...");
         statusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JProgressBar progressBar = new JProgressBar(0, 100);
         progressBar.setStringPainted(true);
-        progressBar.setSize(new Dimension(300, 25));
+        progressBar.setPreferredSize(new Dimension(400, 25));
         progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton btnCancel = new JButton("Přerušit");
@@ -233,7 +257,7 @@ public class Window {
         btnCancel.addActionListener(e -> {
             int choice = JOptionPane.showConfirmDialog(
                     progressDialog,
-                    "Opravdu si přejete přerušit probíhající měření?\nData nebudou uložena.",
+                    "Opravdu přerušit probíhající měření?\nData nebudou uložena.",
                     "Potvrzení",
                     JOptionPane.YES_NO_OPTION
             );
@@ -253,9 +277,9 @@ public class Window {
         });
 
         mainPanel.add(statusLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(progressBar);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(btnCancel);
 
         progressDialog.add(mainPanel);
@@ -272,7 +296,7 @@ public class Window {
                         progressDialog.dispose();
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Měření dokončeno.\nSoubor byl uložen do: " + targetPath.toAbsolutePath(),
+                                "Měření dokončeno.\n\nVýsledky byly uloženy do: " + targetPath.toAbsolutePath(),
                                 "Úspěšné měření",
                                 JOptionPane.INFORMATION_MESSAGE
                         );
@@ -305,17 +329,20 @@ public class Window {
     private static void test(JLabel statusLabel, JProgressBar progressBar) {
         Arrays.sort(ARRAY_SIZES);
         int biggestSize = ARRAY_SIZES[ARRAY_SIZES.length - 1];
-        updateUI(statusLabel, progressBar, "Příprava...", 0);
-
         Integer[] warmup = new Integer[biggestSize];
-        for (int i = 0; i < warmup.length; i++) {
-            warmup[i] = StdRandom.uniformInt(biggestSize);
-        }
-        int warmupIterations = 5;
+        int warmupIterations = WARMUP_ITERATIONS;
+
+        updateUI(statusLabel, progressBar, "Řazení na zahřívacích polích...", 0);
+
         while (warmupIterations-- > 0) {
             if (isCancelled) {
                 return;
             }
+
+            for (int i = 0; i < warmup.length; i++) {
+                warmup[i] = StdRandom.uniformInt(biggestSize);
+            }
+
             Bubble.sort(warmup.clone());
             Selection.sort(warmup.clone());
             Insertion.sort(warmup.clone());
@@ -325,7 +352,7 @@ public class Window {
             Arrays.sort(warmup.clone());
         }
 
-        updateUI(statusLabel, progressBar, "Generování polí...", 5);
+        updateUI(statusLabel, progressBar, "Generování polí pro měření...", 5);
         System.gc();
         try {
             Thread.sleep(100);
@@ -389,7 +416,7 @@ public class Window {
                 String algorithm = ALGORITHMS[j];
 
                 int percent = 5 + (int) (((double) currentStep / totalSteps) * 90);
-                updateUI(statusLabel, progressBar, "Probíhá měření " + algorithm + " na datech (n=" + n + ")", percent);
+                updateUI(statusLabel, progressBar, "Měření algoritmu " + algorithm + " na polích (n=" + n + ")", percent);
 
                 double[] timeRandom = new double[iterations];
                 double[] timePartial = new double[iterations];
@@ -421,7 +448,7 @@ public class Window {
         json.append("  }\n}");
 
         if (!isCancelled) {
-            updateUI(statusLabel, progressBar, "Ukládám výsledky...", 100);
+            updateUI(statusLabel, progressBar, "Ukládání výsledků...", 100);
             saveToFile(json.toString());
         }
     }

@@ -26,19 +26,23 @@ public class Test {
 
     private static final long SEED = 2026;
     private static final byte ITERATIONS = 5;
+    private static final byte WARMPUP_ITERATIONS = 5;
     private static final short PARTIAL_SWAP_PERCENTAGE = 10;
     private static final int DUPLICATES_RANGE = 10;
 
     static void main(String[] args) {
-        System.out.print("Příprava... ");
         Arrays.sort(ARRAY_SIZES);
         int biggestSize = ARRAY_SIZES[ARRAY_SIZES.length - 1];
         Integer[] warmup = new Integer[biggestSize];
-        for (int i = 0; i < warmup.length; i++) {
-            warmup[i] = StdRandom.uniformInt(biggestSize);
-        }
-        int warmupIterations = 5;
+        int warmupIterations = WARMPUP_ITERATIONS;
+
+        System.out.print("Řazení na zahřívacích polích... ");
+
         while (warmupIterations-- > 0) {
+            for (int i = 0; i < warmup.length; i++) {
+                warmup[i] = StdRandom.uniformInt(biggestSize);
+            }
+
             Bubble.sort(warmup.clone());
             Selection.sort(warmup.clone());
             Insertion.sort(warmup.clone());
@@ -54,7 +58,7 @@ public class Test {
         } catch (InterruptedException ignored) {}
         System.out.println("hotovo.");
         
-        System.out.print("Příprava polí... ");
+        System.out.print("Generování polí pro měření... ");
         StdRandom.setSeed(SEED);
         Integer[] masterRandom = new Integer[biggestSize];
         Integer[] masterDuplicates = new Integer[biggestSize];
@@ -82,7 +86,7 @@ public class Test {
                 Thread.sleep(100);
             } catch (InterruptedException ignored) {}
 
-            System.out.println("\n### Měření na n=(" + n + ") ###");
+            System.out.println("\nMěření na polích n=(" + n + ")");
             System.out.print("Příprava... ");
             Integer[] random = new Integer[n];
             System.arraycopy(masterRandom, 0, random, 0, n);
