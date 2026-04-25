@@ -1,16 +1,19 @@
 package com.example;
 
-import java.util.Comparator;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Bubble {
-    private Bubble() { }
+    private Bubble() {
+    }
 
     public static void sort(Comparable[] a) {
         int n = a.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = 1; j < (n - i); j++) {
-                if (less(a[j], a[j - 1])) {
-                    exch(a, j, j - 1);
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (less(a[j + 1], a[j])) {
+                    exch(a, j, j + 1);
                 }
             }
         }
@@ -20,19 +23,30 @@ public class Bubble {
         return v.compareTo(w) < 0;
     }
 
-    private static boolean less(Object v, Object w, Comparator comparator) {
-        return comparator.compare(v, w) < 0;
+    private static void exch(Comparable[] a, int i, int j) {
+        Comparable t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 
-    private static void exch(Object[] a, int i, int j) {
-        Object swap = a[i];
-        a[i] = a[j];
-        a[j] = swap;
+    private static void show(Comparable[] a) {
+        for (int i = 0; i < a.length; i++)
+            StdOut.print(a[i] + " ");
+        StdOut.println();
     }
 
-    private static void exch(int[] a, int i, int j) {
-        int swap = a[i];
-        a[i] = a[j];
-        a[j] = swap;
+    public static boolean isSorted(Comparable[] a) {
+        for (int i = 1; i < a.length; i++)
+            if (less(a[i], a[i-1])) {
+                return false;
+            }
+        return true;
+    }
+
+    static void main(String[] args) {
+        String[] a = In.readStrings();
+        sort(a);
+        assert isSorted(a);
+        show(a);
     }
 }

@@ -36,7 +36,7 @@ public class Test {
         Integer[] warmup = new Integer[biggestSize];
         int warmupIterations = WARMPUP_ITERATIONS;
 
-        System.out.print("Aplikování algoritmů na zahřívacích polích... ");
+        System.out.print("Aplikování algoritmů na zahřívací pole... ");
 
         while (warmupIterations-- > 0) {
             for (int i = 0; i < warmup.length; i++) {

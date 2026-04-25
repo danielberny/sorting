@@ -332,7 +332,7 @@ public class Window {
         Integer[] warmup = new Integer[biggestSize];
         int warmupIterations = WARMUP_ITERATIONS;
 
-        updateUI(statusLabel, progressBar, "Aplikování algoritmů na zahřívacích polích...", 0);
+        updateUI(statusLabel, progressBar, "Aplikování algoritmů na zahřívací pole...", 0);
 
         while (warmupIterations-- > 0) {
             if (isCancelled) {
