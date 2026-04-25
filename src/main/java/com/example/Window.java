@@ -27,8 +27,7 @@ public class Window {
             Insertion.class.getSimpleName(),
             Quick.class.getSimpleName(),
             Heap.class.getSimpleName(),
-            Merge.class.getSimpleName(),
-            "Arrays.sort()"
+            Merge.class.getSimpleName()
     };
     private static final int[] ARRAY_SIZES = {25000, 50000, 100000};
     private static final byte WARMUP_ITERATIONS = 5;
@@ -92,8 +91,6 @@ public class Window {
                 + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
                 + "  <li>Elementární: Bubble sort, Selection sort, Insertion sort.</li>"
                 + "  <li>Pokročilé: Quicksort, Heapsort, Mergesort.</li>"
-                + "  <li>Pro kompletnost probíhá testování i na nativní metodě Arrays.sort() "
-                + "(algoritmus TimSort).</li>"
                 + "</ul>"
 
                 + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
@@ -349,7 +346,6 @@ public class Window {
             Quick.sort(warmup.clone());
             Heap.sort(warmup.clone());
             Merge.sort(warmup.clone());
-            Arrays.sort(warmup.clone());
         }
 
         updateUI(statusLabel, progressBar, "Generování polí pro měření...", 5);
@@ -481,9 +477,6 @@ public class Window {
                 break;
             case "Merge":
                 Merge.sort(data);
-                break;
-            case "Arrays.sort()":
-                Arrays.sort(data);
                 break;
             default:
                 throw new IllegalArgumentException("Neznámý algoritmus: " + algorithm);

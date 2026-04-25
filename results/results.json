@@ -139,28 +139,6 @@
           "average": 0.004,
           "iterations": [0.005, 0.004, 0.004, 0.003, 0.002]
         }
-      },
-      "Arrays.sort()": {
-        "random": {
-          "average": 0.009,
-          "iterations": [0.005, 0.007, 0.006, 0.013, 0.016]
-        },
-        "partial": {
-          "average": 0.006,
-          "iterations": [0.007, 0.004, 0.006, 0.004, 0.007]
-        },
-        "duplicates": {
-          "average": 0.005,
-          "iterations": [0.004, 0.004, 0.006, 0.004, 0.005]
-        },
-        "sorted": {
-          "average": 0.0,
-          "iterations": [0.001, 0.0, 0.0, 0.001, 0.0]
-        },
-        "reversed": {
-          "average": 0.003,
-          "iterations": [0.003, 0.003, 0.004, 0.002, 0.004]
-        }
       }
     },
     "50000": {
@@ -295,28 +273,6 @@
           "average": 0.006,
           "iterations": [0.006, 0.006, 0.006, 0.006, 0.006]
         }
-      },
-      "Arrays.sort()": {
-        "random": {
-          "average": 0.009,
-          "iterations": [0.009, 0.009, 0.008, 0.009, 0.009]
-        },
-        "partial": {
-          "average": 0.004,
-          "iterations": [0.004, 0.004, 0.004, 0.004, 0.004]
-        },
-        "duplicates": {
-          "average": 0.005,
-          "iterations": [0.005, 0.005, 0.005, 0.005, 0.005]
-        },
-        "sorted": {
-          "average": 0.0,
-          "iterations": [0.0, 0.0, 0.0, 0.0, 0.001]
-        },
-        "reversed": {
-          "average": 0.005,
-          "iterations": [0.005, 0.005, 0.005, 0.004, 0.004]
-        }
       }
     },
     "100000": {
@@ -450,28 +406,6 @@
         "reversed": {
           "average": 0.013,
           "iterations": [0.014, 0.014, 0.013, 0.013, 0.013]
-        }
-      },
-      "Arrays.sort()": {
-        "random": {
-          "average": 0.019,
-          "iterations": [0.019, 0.019, 0.019, 0.019, 0.019]
-        },
-        "partial": {
-          "average": 0.009,
-          "iterations": [0.009, 0.009, 0.008, 0.009, 0.009]
-        },
-        "duplicates": {
-          "average": 0.011,
-          "iterations": [0.01, 0.013, 0.01, 0.011, 0.01]
-        },
-        "sorted": {
-          "average": 0.001,
-          "iterations": [0.0, 0.0, 0.001, 0.001, 0.001]
-        },
-        "reversed": {
-          "average": 0.01,
-          "iterations": [0.01, 0.01, 0.01, 0.01, 0.01]
         }
       }
     }

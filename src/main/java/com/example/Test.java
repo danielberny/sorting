@@ -19,14 +19,13 @@ public class Test {
             Insertion.class.getSimpleName(),
             Quick.class.getSimpleName(),
             Heap.class.getSimpleName(),
-            Merge.class.getSimpleName(),
-            "Arrays.sort()"
+            Merge.class.getSimpleName()
     };
     private static final int[] ARRAY_SIZES = {25000, 50000, 100000};
+    private static final byte WARMPUP_ITERATIONS = 5;
 
     private static final long SEED = 2026;
     private static final byte ITERATIONS = 5;
-    private static final byte WARMPUP_ITERATIONS = 5;
     private static final short PARTIAL_SWAP_PERCENTAGE = 10;
     private static final int DUPLICATES_RANGE = 10;
 
@@ -49,7 +48,6 @@ public class Test {
             Quick.sort(warmup.clone());
             Heap.sort(warmup.clone());
             Merge.sort(warmup.clone());
-            Arrays.sort(warmup.clone());
         }
 
         System.gc();
@@ -181,9 +179,6 @@ public class Test {
             case "Merge":
                 Merge.sort(data);
                 break;
-            case "Arrays.sort()":
-                Arrays.sort(data);
-                break;
             default:
                 throw new IllegalArgumentException("Neznámý algoritmus " + algorithm);
         }
@@ -229,16 +224,16 @@ public class Test {
 
     private static void saveToFile(String contents) {
         try {
-            Path folder = Paths.get("vysledky");
+            Path folder = Paths.get("results");
             if (!Files.exists(folder)) {
                 Files.createDirectories(folder);
             }
 
-            Path file = folder.resolve("vysledky.json");
+            Path file = folder.resolve("results.json");
 
             int counter = 1;
             while (Files.exists(file)) {
-                file = folder.resolve("vysledky" + counter + ".json");
+                file = folder.resolve("results" + counter + ".json");
                 counter++;
             }
 
