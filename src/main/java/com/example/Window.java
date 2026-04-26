@@ -26,8 +26,8 @@ public class Window {
             Selection.class.getSimpleName(),
             Insertion.class.getSimpleName(),
             Quick.class.getSimpleName(),
-            Heap.class.getSimpleName(),
-            Merge.class.getSimpleName()
+            Merge.class.getSimpleName(),
+            Heap.class.getSimpleName()
     };
     private static final int[] ARRAY_SIZES = {25000, 50000, 100000};
     private static final byte WARMUP_ITERATIONS = 5;
@@ -416,7 +416,7 @@ public class Window {
 
                 int percent = 5 + (int) (((double) currentStep / totalSteps) * 90);
                 String fn = String.format(new Locale("cs", "CZ"), "%,d", n);
-                updateUI(statusLabel, progressBar, "Měření algoritmu " + algorithm + " na polích o velikosti (n=" + fn + ")", percent);
+                updateUI(statusLabel, progressBar, "Měření algoritmu třídy " + algorithm + " na polích o velikosti n = " + fn, percent);
 
                 double[] timeRandom = new double[iterations];
                 double[] timePartial = new double[iterations];
@@ -475,14 +475,14 @@ public class Window {
             case "Quick":
                 Quick.sort(data);
                 break;
-            case "Heap":
-                Heap.sort(data);
-                break;
             case "Merge":
                 Merge.sort(data);
                 break;
+            case "Heap":
+                Heap.sort(data);
+                break;
             default:
-                throw new IllegalArgumentException("Neznámý algoritmus: " + algorithm);
+                throw new IllegalArgumentException("Neznámá třída algoritmu: " + algorithm);
         }
 
         double time = timer.elapsedTime();
@@ -490,7 +490,7 @@ public class Window {
             isCancelled = true;
             SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(
                     progressDialog,
-                    "Algoritmus " + algorithm + " neseřadil posloupnost správně.",
+                    "Algoritmus třídy " + algorithm + " neseřadil posloupnost správně.",
                     "Neočekávaná chyba",
                     JOptionPane.ERROR_MESSAGE
             ));

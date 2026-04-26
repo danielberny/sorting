@@ -10,358 +10,380 @@
     "25000": {
       "Bubble": {
         "random": {
-          "average": 1.387,
-          "iterations": [1.375, 1.381, 1.396, 1.403, 1.381]
+          "average": 1.319,
+          "iterations": [1.32, 1.317, 1.325, 1.324, 1.31]
         },
         "partial": {
-          "average": 0.616,
-          "iterations": [0.608, 0.614, 0.626, 0.62, 0.611]
+          "average": 0.564,
+          "iterations": [0.562, 0.589, 0.555, 0.555, 0.558]
         },
         "duplicates": {
-          "average": 1.306,
-          "iterations": [1.311, 1.307, 1.299, 1.301, 1.312]
+          "average": 1.239,
+          "iterations": [1.239, 1.235, 1.249, 1.237, 1.236]
         },
         "sorted": {
-          "average": 0.492,
-          "iterations": [0.485, 0.483, 0.484, 0.5, 0.506]
+          "average": 0.431,
+          "iterations": [0.429, 0.427, 0.433, 0.435, 0.431]
         },
         "reversed": {
-          "average": 1.11,
-          "iterations": [1.086, 1.122, 1.098, 1.123, 1.122]
+          "average": 1.101,
+          "iterations": [1.077, 1.122, 1.108, 1.104, 1.095]
         }
       },
       "Selection": {
         "random": {
-          "average": 1.057,
-          "iterations": [1.043, 1.051, 1.046, 1.049, 1.098]
+          "average": 1.05,
+          "iterations": [1.037, 1.037, 1.033, 1.098, 1.046]
         },
         "partial": {
-          "average": 1.066,
-          "iterations": [1.053, 1.055, 1.051, 1.056, 1.116]
+          "average": 1.044,
+          "iterations": [1.048, 1.042, 1.039, 1.044, 1.046]
         },
         "duplicates": {
-          "average": 1.045,
-          "iterations": [1.032, 1.036, 1.029, 1.063, 1.067]
+          "average": 1.03,
+          "iterations": [1.037, 1.028, 1.031, 1.03, 1.026]
         },
         "sorted": {
-          "average": 1.077,
-          "iterations": [1.05, 1.057, 1.052, 1.146, 1.078]
+          "average": 1.045,
+          "iterations": [1.042, 1.053, 1.051, 1.039, 1.04]
         },
         "reversed": {
-          "average": 1.077,
-          "iterations": [1.053, 1.052, 1.055, 1.147, 1.079]
+          "average": 1.058,
+          "iterations": [1.044, 1.054, 1.096, 1.048, 1.048]
         }
       },
       "Insertion": {
         "random": {
-          "average": 0.662,
-          "iterations": [0.582, 0.785, 0.657, 0.676, 0.608]
+          "average": 0.557,
+          "iterations": [0.563, 0.55, 0.548, 0.558, 0.565]
         },
         "partial": {
-          "average": 0.149,
-          "iterations": [0.138, 0.161, 0.149, 0.15, 0.148]
+          "average": 0.132,
+          "iterations": [0.133, 0.139, 0.13, 0.13, 0.129]
         },
         "duplicates": {
-          "average": 0.523,
-          "iterations": [0.516, 0.516, 0.512, 0.546, 0.526]
+          "average": 0.478,
+          "iterations": [0.491, 0.475, 0.474, 0.474, 0.477]
         },
         "sorted": {
-          "average": 0.0,
+          "average": 0,
           "iterations": [0.0, 0.0, 0.0, 0.0, 0.0]
         },
         "reversed": {
-          "average": 1.472,
-          "iterations": [1.465, 1.626, 1.594, 1.32, 1.355]
+          "average": 1.124,
+          "iterations": [1.12, 1.109, 1.113, 1.149, 1.131]
         }
       },
       "Quick": {
         "random": {
-          "average": 0.004,
-          "iterations": [0.005, 0.004, 0.004, 0.003, 0.003]
+          "average": 0.003,
+          "iterations": [0.003, 0.003, 0.003, 0.003, 0.003]
         },
         "partial": {
-          "average": 0.004,
-          "iterations": [0.004, 0.004, 0.004, 0.003, 0.004]
+          "average": 0.003,
+          "iterations": [0.003, 0.003, 0.003, 0.003, 0.003]
         },
         "duplicates": {
           "average": 0.002,
-          "iterations": [0.002, 0.002, 0.002, 0.002, 0.002]
+          "iterations": [0.002, 0.002, 0.001, 0.002, 0.002]
         },
         "sorted": {
-          "average": 0.004,
-          "iterations": [0.003, 0.004, 0.003, 0.004, 0.005]
-        },
-        "reversed": {
-          "average": 0.004,
-          "iterations": [0.004, 0.004, 0.004, 0.003, 0.004]
-        }
-      },
-      "Heap": {
-        "random": {
-          "average": 0.006,
-          "iterations": [0.006, 0.004, 0.005, 0.006, 0.007]
-        },
-        "partial": {
-          "average": 0.004,
-          "iterations": [0.006, 0.004, 0.004, 0.004, 0.004]
-        },
-        "duplicates": {
           "average": 0.003,
-          "iterations": [0.004, 0.004, 0.003, 0.003, 0.003]
-        },
-        "sorted": {
-          "average": 0.004,
-          "iterations": [0.004, 0.003, 0.004, 0.005, 0.004]
+          "iterations": [0.003, 0.003, 0.003, 0.003, 0.003]
         },
         "reversed": {
-          "average": 0.004,
-          "iterations": [0.004, 0.004, 0.004, 0.005, 0.004]
+          "average": 0.003,
+          "iterations": [0.003, 0.003, 0.003, 0.003, 0.003]
         }
       },
       "Merge": {
         "random": {
           "average": 0.005,
-          "iterations": [0.006, 0.006, 0.005, 0.005, 0.005]
+          "iterations": [0.005, 0.005, 0.005, 0.005, 0.005]
         },
         "partial": {
-          "average": 0.004,
-          "iterations": [0.005, 0.003, 0.005, 0.004, 0.005]
+          "average": 0.003,
+          "iterations": [0.003, 0.003, 0.003, 0.003, 0.004]
         },
         "duplicates": {
           "average": 0.003,
-          "iterations": [0.003, 0.003, 0.003, 0.004, 0.004]
+          "iterations": [0.003, 0.003, 0.003, 0.004, 0.003]
         },
         "sorted": {
           "average": 0.003,
-          "iterations": [0.003, 0.004, 0.003, 0.003, 0.003]
+          "iterations": [0.003, 0.003, 0.003, 0.002, 0.005]
+        },
+        "reversed": {
+          "average": 0.002,
+          "iterations": [0.003, 0.002, 0.002, 0.002, 0.003]
+        }
+      },
+      "Heap": {
+        "random": {
+          "average": 0.005,
+          "iterations": [0.006, 0.005, 0.005, 0.005, 0.004]
+        },
+        "partial": {
+          "average": 0.004,
+          "iterations": [0.003, 0.004, 0.004, 0.003, 0.004]
+        },
+        "duplicates": {
+          "average": 0.004,
+          "iterations": [0.004, 0.003, 0.003, 0.004, 0.004]
+        },
+        "sorted": {
+          "average": 0.003,
+          "iterations": [0.004, 0.004, 0.003, 0.003, 0.003]
         },
         "reversed": {
           "average": 0.004,
-          "iterations": [0.005, 0.004, 0.004, 0.003, 0.002]
+          "iterations": [0.003, 0.003, 0.004, 0.004, 0.004]
         }
       }
     },
     "50000": {
       "Bubble": {
         "random": {
-          "average": 6.619,
-          "iterations": [6.816, 6.643, 6.522, 6.58, 6.534]
+          "average": 6.431,
+          "iterations": [6.431, 6.439, 6.434, 6.441, 6.412]
         },
         "partial": {
-          "average": 3.204,
-          "iterations": [3.628, 3.139, 3.099, 3.072, 3.082]
+          "average": 2.948,
+          "iterations": [2.928, 2.945, 2.925, 3.019, 2.924]
         },
         "duplicates": {
-          "average": 5.935,
-          "iterations": [5.965, 5.926, 5.973, 5.891, 5.92]
+          "average": 5.815,
+          "iterations": [5.8, 5.8, 5.785, 5.899, 5.792]
         },
         "sorted": {
-          "average": 2.259,
-          "iterations": [2.347, 2.239, 2.237, 2.212, 2.262]
+          "average": 2.132,
+          "iterations": [2.134, 2.132, 2.122, 2.167, 2.107]
         },
         "reversed": {
-          "average": 5.749,
-          "iterations": [6.023, 5.666, 5.749, 5.629, 5.68]
+          "average": 5.779,
+          "iterations": [5.791, 5.778, 5.795, 5.792, 5.741]
         }
       },
       "Selection": {
         "random": {
-          "average": 4.295,
-          "iterations": [4.231, 4.223, 4.561, 4.24, 4.219]
+          "average": 4.194,
+          "iterations": [4.192, 4.219, 4.182, 4.179, 4.196]
         },
         "partial": {
-          "average": 4.28,
-          "iterations": [4.283, 4.279, 4.313, 4.273, 4.25]
+          "average": 4.251,
+          "iterations": [4.266, 4.241, 4.236, 4.239, 4.273]
         },
         "duplicates": {
-          "average": 4.192,
-          "iterations": [4.247, 4.134, 4.191, 4.193, 4.193]
+          "average": 4.126,
+          "iterations": [4.122, 4.105, 4.121, 4.167, 4.116]
         },
         "sorted": {
-          "average": 4.281,
-          "iterations": [4.307, 4.267, 4.304, 4.256, 4.269]
+          "average": 4.242,
+          "iterations": [4.237, 4.233, 4.249, 4.251, 4.241]
         },
         "reversed": {
-          "average": 4.341,
-          "iterations": [4.556, 4.306, 4.303, 4.261, 4.277]
+          "average": 4.242,
+          "iterations": [4.248, 4.234, 4.234, 4.24, 4.253]
         }
       },
       "Insertion": {
         "random": {
-          "average": 2.804,
-          "iterations": [3.018, 2.755, 2.74, 2.755, 2.75]
+          "average": 2.518,
+          "iterations": [2.515, 2.514, 2.507, 2.527, 2.525]
         },
         "partial": {
-          "average": 0.636,
-          "iterations": [0.64, 0.631, 0.643, 0.635, 0.63]
+          "average": 0.576,
+          "iterations": [0.577, 0.576, 0.576, 0.577, 0.575]
         },
         "duplicates": {
-          "average": 1.997,
-          "iterations": [1.996, 1.997, 1.993, 2.001, 2.0]
+          "average": 1.905,
+          "iterations": [1.905, 1.905, 1.906, 1.905, 1.904]
         },
         "sorted": {
-          "average": 0.0,
-          "iterations": [0.0, 0.0, 0.0, 0.0, 0.0]
+          "average": 0,
+          "iterations": [0.0, 0.001, 0.0, 0.0, 0.001]
         },
         "reversed": {
-          "average": 6.335,
-          "iterations": [6.324, 6.339, 6.34, 6.332, 6.34]
+          "average": 5.651,
+          "iterations": [5.705, 5.648, 5.629, 5.635, 5.638]
         }
       },
       "Quick": {
         "random": {
-          "average": 0.007,
-          "iterations": [0.008, 0.007, 0.007, 0.007, 0.007]
+          "average": 0.006,
+          "iterations": [0.007, 0.007, 0.006, 0.006, 0.006]
         },
         "partial": {
           "average": 0.007,
-          "iterations": [0.007, 0.007, 0.007, 0.007, 0.007]
+          "iterations": [0.006, 0.006, 0.007, 0.007, 0.007]
         },
         "duplicates": {
-          "average": 0.004,
-          "iterations": [0.004, 0.003, 0.004, 0.004, 0.004]
+          "average": 0.003,
+          "iterations": [0.003, 0.004, 0.004, 0.003, 0.003]
         },
         "sorted": {
-          "average": 0.007,
-          "iterations": [0.007, 0.007, 0.007, 0.007, 0.007]
+          "average": 0.006,
+          "iterations": [0.006, 0.006, 0.006, 0.007, 0.007]
         },
         "reversed": {
           "average": 0.007,
-          "iterations": [0.007, 0.008, 0.007, 0.007, 0.007]
+          "iterations": [0.007, 0.007, 0.007, 0.007, 0.006]
+        }
+      },
+      "Merge": {
+        "random": {
+          "average": 0.01,
+          "iterations": [0.01, 0.009, 0.01, 0.011, 0.01]
+        },
+        "partial": {
+          "average": 0.007,
+          "iterations": [0.007, 0.006, 0.007, 0.007, 0.007]
+        },
+        "duplicates": {
+          "average": 0.007,
+          "iterations": [0.007, 0.007, 0.007, 0.007, 0.009]
+        },
+        "sorted": {
+          "average": 0.006,
+          "iterations": [0.006, 0.006, 0.006, 0.005, 0.006]
+        },
+        "reversed": {
+          "average": 0.006,
+          "iterations": [0.005, 0.006, 0.006, 0.006, 0.006]
         }
       },
       "Heap": {
         "random": {
           "average": 0.011,
-          "iterations": [0.011, 0.011, 0.011, 0.011, 0.011]
+          "iterations": [0.012, 0.011, 0.011, 0.011, 0.011]
         },
         "partial": {
           "average": 0.008,
-          "iterations": [0.009, 0.008, 0.008, 0.008, 0.008]
+          "iterations": [0.008, 0.008, 0.008, 0.008, 0.008]
         },
         "duplicates": {
-          "average": 0.007,
-          "iterations": [0.007, 0.006, 0.007, 0.007, 0.007]
-        },
-        "sorted": {
-          "average": 0.008,
-          "iterations": [0.007, 0.008, 0.008, 0.007, 0.008]
-        },
-        "reversed": {
-          "average": 0.007,
-          "iterations": [0.008, 0.008, 0.007, 0.007, 0.007]
-        }
-      },
-      "Merge": {
-        "random": {
-          "average": 0.009,
-          "iterations": [0.009, 0.009, 0.009, 0.01, 0.009]
-        },
-        "partial": {
           "average": 0.007,
           "iterations": [0.007, 0.007, 0.007, 0.007, 0.007]
         },
-        "duplicates": {
-          "average": 0.007,
-          "iterations": [0.007, 0.007, 0.007, 0.006, 0.007]
-        },
         "sorted": {
-          "average": 0.006,
-          "iterations": [0.006, 0.006, 0.006, 0.006, 0.006]
+          "average": 0.008,
+          "iterations": [0.007, 0.008, 0.007, 0.008, 0.008]
         },
         "reversed": {
-          "average": 0.006,
-          "iterations": [0.006, 0.006, 0.006, 0.006, 0.006]
+          "average": 0.008,
+          "iterations": [0.007, 0.008, 0.008, 0.008, 0.007]
         }
       }
     },
     "100000": {
       "Bubble": {
         "random": {
-          "average": 28.635,
-          "iterations": [28.962, 28.474, 28.261, 29.109, 28.37]
+          "average": 28.02,
+          "iterations": [27.946, 28.002, 28.14, 27.97, 28.041]
         },
         "partial": {
-          "average": 14.909,
-          "iterations": [15.781, 14.608, 14.529, 14.915, 14.712]
+          "average": 14.022,
+          "iterations": [13.864, 13.889, 13.865, 14.654, 13.839]
         },
         "duplicates": {
-          "average": 24.211,
-          "iterations": [24.246, 24.219, 24.215, 24.193, 24.18]
+          "average": 23.963,
+          "iterations": [23.956, 23.942, 23.939, 23.959, 24.019]
         },
         "sorted": {
-          "average": 9.826,
-          "iterations": [10.042, 9.76, 9.809, 9.786, 9.734]
+          "average": 9.435,
+          "iterations": [9.411, 9.486, 9.404, 9.43, 9.443]
         },
         "reversed": {
-          "average": 25.605,
-          "iterations": [26.173, 25.311, 25.059, 24.962, 26.519]
+          "average": 26.338,
+          "iterations": [25.555, 26.105, 25.639, 28.626, 25.767]
         }
       },
       "Selection": {
         "random": {
-          "average": 16.86,
-          "iterations": [16.95, 16.904, 16.823, 16.824, 16.8]
+          "average": 16.83,
+          "iterations": [16.815, 16.822, 16.87, 16.771, 16.871]
         },
         "partial": {
-          "average": 17.262,
-          "iterations": [17.328, 17.232, 17.257, 17.232, 17.259]
+          "average": 17.259,
+          "iterations": [17.258, 17.315, 17.239, 17.281, 17.201]
         },
         "duplicates": {
-          "average": 16.501,
-          "iterations": [16.515, 16.449, 16.622, 16.489, 16.43]
+          "average": 16.51,
+          "iterations": [16.453, 16.436, 16.53, 16.671, 16.459]
         },
         "sorted": {
-          "average": 17.284,
-          "iterations": [17.383, 17.256, 17.309, 17.236, 17.234]
+          "average": 17.263,
+          "iterations": [17.278, 17.272, 17.256, 17.279, 17.231]
         },
         "reversed": {
           "average": 17.28,
-          "iterations": [17.369, 17.243, 17.24, 17.308, 17.242]
+          "iterations": [17.284, 17.263, 17.266, 17.25, 17.339]
         }
       },
       "Insertion": {
         "random": {
-          "average": 12.999,
-          "iterations": [12.972, 12.989, 13.012, 13.012, 13.008]
+          "average": 11.741,
+          "iterations": [11.633, 11.818, 11.704, 11.771, 11.78]
         },
         "partial": {
-          "average": 2.845,
-          "iterations": [2.848, 2.857, 2.844, 2.854, 2.823]
+          "average": 2.589,
+          "iterations": [2.578, 2.604, 2.61, 2.591, 2.56]
         },
         "duplicates": {
-          "average": 7.987,
-          "iterations": [7.974, 7.968, 8.007, 8.007, 7.98]
+          "average": 7.665,
+          "iterations": [7.63, 7.665, 7.695, 7.665, 7.669]
         },
         "sorted": {
           "average": 0.001,
-          "iterations": [0.001, 0.001, 0.0, 0.001, 0.001]
+          "iterations": [0.001, 0.001, 0.001, 0.001, 0.001]
         },
         "reversed": {
-          "average": 28.517,
-          "iterations": [28.449, 28.504, 28.47, 28.496, 28.666]
+          "average": 25.268,
+          "iterations": [25.351, 25.142, 25.215, 25.469, 25.162]
         }
       },
       "Quick": {
         "random": {
-          "average": 0.016,
-          "iterations": [0.017, 0.015, 0.016, 0.016, 0.015]
+          "average": 0.015,
+          "iterations": [0.016, 0.015, 0.014, 0.014, 0.015]
         },
         "partial": {
           "average": 0.015,
-          "iterations": [0.015, 0.016, 0.016, 0.015, 0.015]
+          "iterations": [0.015, 0.014, 0.015, 0.015, 0.014]
         },
         "duplicates": {
           "average": 0.007,
-          "iterations": [0.007, 0.008, 0.007, 0.007, 0.008]
+          "iterations": [0.007, 0.007, 0.007, 0.007, 0.007]
         },
         "sorted": {
-          "average": 0.016,
-          "iterations": [0.016, 0.016, 0.015, 0.016, 0.015]
+          "average": 0.015,
+          "iterations": [0.015, 0.015, 0.015, 0.014, 0.015]
         },
         "reversed": {
           "average": 0.015,
-          "iterations": [0.016, 0.015, 0.015, 0.016, 0.015]
+          "iterations": [0.015, 0.014, 0.015, 0.015, 0.015]
+        }
+      },
+      "Merge": {
+        "random": {
+          "average": 0.021,
+          "iterations": [0.022, 0.022, 0.021, 0.021, 0.021]
+        },
+        "partial": {
+          "average": 0.016,
+          "iterations": [0.018, 0.016, 0.016, 0.016, 0.016]
+        },
+        "duplicates": {
+          "average": 0.014,
+          "iterations": [0.014, 0.014, 0.014, 0.014, 0.014]
+        },
+        "sorted": {
+          "average": 0.013,
+          "iterations": [0.013, 0.014, 0.013, 0.014, 0.013]
+        },
+        "reversed": {
+          "average": 0.013,
+          "iterations": [0.014, 0.013, 0.013, 0.014, 0.013]
         }
       },
       "Heap": {
@@ -371,41 +393,19 @@
         },
         "partial": {
           "average": 0.019,
-          "iterations": [0.019, 0.018, 0.019, 0.019, 0.021]
+          "iterations": [0.018, 0.018, 0.019, 0.019, 0.019]
         },
         "duplicates": {
           "average": 0.014,
-          "iterations": [0.014, 0.014, 0.014, 0.014, 0.014]
+          "iterations": [0.014, 0.015, 0.014, 0.014, 0.014]
         },
         "sorted": {
           "average": 0.016,
           "iterations": [0.016, 0.016, 0.016, 0.016, 0.016]
         },
         "reversed": {
-          "average": 0.016,
-          "iterations": [0.016, 0.016, 0.016, 0.016, 0.016]
-        }
-      },
-      "Merge": {
-        "random": {
-          "average": 0.02,
-          "iterations": [0.02, 0.02, 0.02, 0.02, 0.02]
-        },
-        "partial": {
-          "average": 0.015,
-          "iterations": [0.016, 0.016, 0.015, 0.015, 0.015]
-        },
-        "duplicates": {
-          "average": 0.013,
-          "iterations": [0.013, 0.013, 0.013, 0.013, 0.013]
-        },
-        "sorted": {
-          "average": 0.014,
-          "iterations": [0.013, 0.014, 0.014, 0.014, 0.014]
-        },
-        "reversed": {
-          "average": 0.013,
-          "iterations": [0.014, 0.014, 0.013, 0.013, 0.013]
+          "average": 0.017,
+          "iterations": [0.017, 0.017, 0.017, 0.016, 0.017]
         }
       }
     }

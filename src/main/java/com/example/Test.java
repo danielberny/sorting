@@ -18,8 +18,8 @@ public class Test {
             Selection.class.getSimpleName(),
             Insertion.class.getSimpleName(),
             Quick.class.getSimpleName(),
-            Heap.class.getSimpleName(),
-            Merge.class.getSimpleName()
+            Merge.class.getSimpleName(),
+            Heap.class.getSimpleName()
     };
     private static final int[] ARRAY_SIZES = {25000, 50000, 100000};
     private static final byte WARMPUP_ITERATIONS = 5;
@@ -88,7 +88,7 @@ public class Test {
             } catch (InterruptedException ignored) {}
 
             String fn = String.format(new Locale("cs", "CZ"), "%,d", n);
-            System.out.println("\nMěření na polích n=(" + fn + ")");
+            System.out.println("\nMěření na polích n = " + fn);
             System.out.print("Příprava... ");
             Integer[] random = new Integer[n];
             System.arraycopy(masterRandom, 0, random, 0, n);
@@ -113,7 +113,7 @@ public class Test {
 
             for (int j = 0; j < ALGORITHMS.length; j++) {
                 String algorithm = ALGORITHMS[j];
-                System.out.print(algorithm + "... ");
+                System.out.print("Algoritmus třídy " + algorithm + "... ");
 
                 double[] timeRandom = new double[ITERATIONS];
                 double[] timePartial = new double[ITERATIONS];
@@ -176,19 +176,19 @@ public class Test {
             case "Quick":
                 Quick.sort(data);
                 break;
-            case "Heap":
-                Heap.sort(data);
-                break;
             case "Merge":
                 Merge.sort(data);
                 break;
+            case "Heap":
+                Heap.sort(data);
+                break;
             default:
-                throw new IllegalArgumentException("Neznámý algoritmus " + algorithm);
+                throw new IllegalArgumentException("Neznámá třída algoritmu: " + algorithm);
         }
 
         double time = timer.elapsedTime();
         if (!isSorted(data)) {
-            throw new RuntimeException("Chybné řazení u algoritmu " + algorithm);
+            throw new RuntimeException("Algoritmus třídy " + algorithm + " neseřadil posloupnost správně");
         }
         return time;
     }
