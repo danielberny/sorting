@@ -33,14 +33,17 @@ public class Test {
         Arrays.sort(ARRAY_SIZES);
         int biggestSize = ARRAY_SIZES[ARRAY_SIZES.length - 1];
         Integer[] warmup = new Integer[biggestSize];
+        StdRandom.setSeed(SEED);
+        for (int i = 0; i < warmup.length; i++) {
+            warmup[i] = StdRandom.uniformInt(biggestSize);
+        }
         int warmupIterations = WARMPUP_ITERATIONS;
 
         System.out.print("Aplikování algoritmů na zahřívací pole... ");
 
+        StdRandom.setSeed(SEED);
         while (warmupIterations-- > 0) {
-            for (int i = 0; i < warmup.length; i++) {
-                warmup[i] = StdRandom.uniformInt(biggestSize);
-            }
+            StdRandom.shuffle(warmup);
 
             Bubble.sort(warmup.clone());
             Selection.sort(warmup.clone());
@@ -57,9 +60,9 @@ public class Test {
         System.out.println("hotovo.");
         
         System.out.print("Generování polí pro měření... ");
-        StdRandom.setSeed(SEED);
         Integer[] masterRandom = new Integer[biggestSize];
         Integer[] masterDuplicates = new Integer[biggestSize];
+        StdRandom.setSeed(SEED);
         for (int i = 0; i < biggestSize; i++) {
             masterRandom[i] = StdRandom.uniformInt(biggestSize);
             masterDuplicates[i] = StdRandom.uniformInt(DUPLICATES_RANGE);

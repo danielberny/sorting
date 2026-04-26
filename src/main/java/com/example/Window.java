@@ -327,18 +327,21 @@ public class Window {
         Arrays.sort(ARRAY_SIZES);
         int biggestSize = ARRAY_SIZES[ARRAY_SIZES.length - 1];
         Integer[] warmup = new Integer[biggestSize];
+        StdRandom.setSeed(seed);
+        for (int i = 0; i < warmup.length; i++) {
+            warmup[i] = StdRandom.uniformInt(biggestSize);
+        }
         int warmupIterations = WARMUP_ITERATIONS;
 
         updateUI(statusLabel, progressBar, "Aplikování algoritmů na zahřívací pole...", 0);
 
+        StdRandom.setSeed(seed);
         while (warmupIterations-- > 0) {
             if (isCancelled) {
                 return;
             }
 
-            for (int i = 0; i < warmup.length; i++) {
-                warmup[i] = StdRandom.uniformInt(biggestSize);
-            }
+            StdRandom.shuffle(warmup);
 
             Bubble.sort(warmup.clone());
             Selection.sort(warmup.clone());
@@ -363,9 +366,9 @@ public class Window {
         json.append("    \"partial_swap_percentage\": ").append(partial_swap_percentage).append("\n  },\n");
         json.append("  \"results\": {\n");
 
-        StdRandom.setSeed(seed);
         Integer[] masterRandom = new Integer[biggestSize];
         Integer[] masterDuplicates = new Integer[biggestSize];
+        StdRandom.setSeed(seed);
         for (int i = 0; i < biggestSize; i++) {
             masterRandom[i] = StdRandom.uniformInt(biggestSize);
             masterDuplicates[i] = StdRandom.uniformInt(duplicates_range);
