@@ -59,10 +59,10 @@ public class Window {
 
         String title = "<html><body style=\"width: 750px;\">"
                 + "<h2 style=\"margin-top: 0px; margin-bottom: 2px;\">Analýza řadicích algoritmů</h2>"
-                + "<p>Tento program provádí měření časové složitosti algoritmů v reálném běhovém "
-                + "prostředí JVM s využitím programovacího jazyka Java. "
-                + "Pro maximální eliminaci zkreslení dat je nejprve prováděno testování "
-                + "v rámci zahřívací fáze (tzv. warm-up).</p>"
+                + "<p>Tento program provádí měření časové složitosti "
+                + "s využitím programovacího jazyka Java. "
+                + "Pro maximální přesnost měření je proto pro každý algoritmus "
+                + "implementována příslušný zahřívací chod.</p>"
 
                 + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
                 + "Testování</u></h3>"
@@ -72,12 +72,12 @@ public class Window {
                 + "ke knize <i>Algorithms, 4th Edition</i> (https://algs4.cs.princeton.edu) "
                 + "od autorů R. Sedgewick a K. Wayne (ISBN-10: 0-321-57351-X, ISBN-13: 978-0-321-57351-3).</p>"
                 + "<p>Program měří čas ve vteřinách napříč třemi fixními velikostmi standardních "
-                + "polí (25 000, 50 000, 100 000) a pěti separátními datovými scénáři. "
+                + "polí (25 000, 50 000, 100 000) a pěti různými separátními datovými scénáři. "
                 + "Všechny algoritmy operují nad objekty třídy Integer (využívající rozhraní "
                 + "Comparable) ve snaze simulovat režii moderních objektových architektur.</p>"
                 + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
                 + "  <li>\"random\": Náhodně generované pole s daty v rozsahu 0–100 000.</li>"
-                + "  <li>\"partial\": Seřazené \"random\" pole s procentuálním šumem.</li>"
+                + "  <li>\"partial\": Seřazené \"random\" pole s procentuálním promícháním.</li>"
                 + "  <li>\"duplicates\": Náhodně generované pole s daty v omezeném rozsahu.</li>"
                 + "  <li>\"sorted\": Seřazené pole \"random\".</li>"
                 + "  <li>\"reversed\": Pozpátku seřazené pole \"random\".</li>"
@@ -86,11 +86,11 @@ public class Window {
                 + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
                 + "Testované algoritmy</u></h3>"
                 + "<p>Většina implementací pochází ze zmíněného repozitáře. "
-                + "Vlastní implementací byl pro kompletnost doplněn algoritmus Bubble sort, "
+                + "Vlastní implementací byl pro kompletnost doplněn algoritmus bubble sort, "
                 + "přičemž předmětem testování jsou následující algoritmy.</p>"
                 + "<ul style=\"margin-top: 4px; margin-bottom: 0px;\">"
-                + "  <li>Elementární: Bubble sort, Selection sort, Insertion sort.</li>"
-                + "  <li>Pokročilé: Quicksort, Heapsort, Mergesort.</li>"
+                + "  <li>Základní: bubble sort, selection sort, insertion sort.</li>"
+                + "  <li>Pokročilé: quicksort, mergesort, heapsort.</li>"
                 + "</ul>"
 
                 + "<h3 style=\"margin-top: 6px; margin-bottom: 2px;\"><u>"
@@ -102,7 +102,7 @@ public class Window {
                 + "datového typu long větší než nula).</li>"
                 + "  <li>Počet opakování: Počet iterací jednotlivých měření (pro garanci "
                 + "realizovatelnosti v rozumném čase v rozsahu 1–10).</li>"
-                + "  <li>Procento promíchání: Generuje náhodný šum (v podobě záměny prvků na "
+                + "  <li>Procento promíchání: Generuje náhodné promíchání (v podobě záměny prvků na "
                 + "náhodně generovaných indexech rovněž vycházejících z hodnoty seed) pro simulaci "
                 + "reálných dat (vstupem je počet těchto záměn v podobě procent z velikosti "
                 + "testovaného pole omezený na 1–200; při vyšších procentech ekvivalentem náhodných dat).</li>"
@@ -347,8 +347,8 @@ public class Window {
             Selection.sort(warmup.clone());
             Insertion.sort(warmup.clone());
             Quick.sort(warmup.clone());
-            Heap.sort(warmup.clone());
             Merge.sort(warmup.clone());
+            Heap.sort(warmup.clone());
         }
 
         updateUI(statusLabel, progressBar, "Generování polí pro měření...", 5);

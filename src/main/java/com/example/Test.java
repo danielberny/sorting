@@ -49,8 +49,8 @@ public class Test {
             Selection.sort(warmup.clone());
             Insertion.sort(warmup.clone());
             Quick.sort(warmup.clone());
-            Heap.sort(warmup.clone());
             Merge.sort(warmup.clone());
+            Heap.sort(warmup.clone());
         }
 
         System.gc();
